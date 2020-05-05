@@ -5250,7 +5250,7 @@ test.prototype.handleClick = function () {
   console.log("sdfhadsf");
 };
 
-Object.setPrototypeOf(test.prototype, react__WEBPACK_IMPORTED_MODULE_0___default.a.Component.prototype);
+Object.setPrototypeOf(test.prototype, _account__WEBPACK_IMPORTED_MODULE_2__["default"].prototype);
 
 /***/ }),
 
