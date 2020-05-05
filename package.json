@@ -1,0 +1,27 @@
+{
+  "name": "quiz-and-test",
+  "version": "1.0.0",
+  "description": "quiz-and-test web system for nest academy by delgersaikhan bayanmunkh 94107666",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Delgerskhn/quiz-and-test.git"
+  },
+  "author": "Delgersaikhan Bayanmunkh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Delgerskhn/quiz-and-test/issues"
+  },
+  "homepage": "https://github.com/Delgerskhn/quiz-and-test#readme",
+  "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.3.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
