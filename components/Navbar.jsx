@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Login from "../components/Login";
+import Dropdown from "./Dropdown";
 
 export default () => (
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,11 +26,32 @@ export default () => (
           </Link>
         </li>
         <li class="nav-item">
-          <Link href="/account">
-            <a class="nav-link">
-              Account <span class="sr-only">(current)</span>
-            </a>
-          </Link>
+          <Dropdown
+            invoker={
+              <a
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Account
+              </a>
+            }
+          >
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <Link href="/account?action=info">
+                <a class="dropdown-item">My information</a>
+              </Link>
+              <Link href="/account?action=quiz">
+                <a class="dropdown-item">My quizes</a>
+              </Link>
+              <Link href="/account?action=test">
+                <a class="dropdown-item">My tests</a>
+              </Link>
+            </div>
+          </Dropdown>
         </li>
         <li class="nav-item ">
           <Link href="/quiz">

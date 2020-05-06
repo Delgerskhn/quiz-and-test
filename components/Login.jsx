@@ -7,9 +7,11 @@ export default function Login() {
   };
   return (
     <li class="nav-item">
-      <a class="nav-link" style={{ cursor: "pointer" }} onClick={showmodal}>
-        Login
-      </a>
+      <summary>
+        <a class="nav-link" onClick={showmodal}>
+          Login
+        </a>
+      </summary>
       <div class="modal" style={{ display: modal }} tabindex="1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">

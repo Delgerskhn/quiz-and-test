@@ -12,8 +12,6 @@ nisi vulputate fringilla. Donec lacinia congue felis in faucibus.`,
   );
   return (
     <div class="container">
-      <h1 class="display-4">Last quizes</h1>
-      <hr></hr>
       <ul class="list-unstyled">
         {list.map((a) => (
           <li class="media">

@@ -1,14 +1,17 @@
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Latestposts from "../components/Posts";
 function account(props) {
-  const [count, setCount] = useState(0);
-  const handleClick = () => {
-    setCount(count + 1);
-  };
+  useEffect(() => {
+    console.log(props.url.query.action);
+  }, []);
   return (
     <Layout>
-      <button onClick={handleClick}>+1</button>
-      <p>{count}</p>
+      <div className="container">
+        <h1 class="display-4">My posts</h1>
+        <hr />
+        <Latestposts />
+      </div>
     </Layout>
   );
 }
