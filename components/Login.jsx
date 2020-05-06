@@ -7,7 +7,7 @@ export default function Login() {
   };
   return (
     <li class="nav-item">
-      <a class="nav-link text-primary" onClick={showmodal}>
+      <a class="nav-link" style={{ cursor: "pointer" }} onClick={showmodal}>
         Login
       </a>
       <div class="modal" style={{ display: modal }} tabindex="1" role="dialog">
