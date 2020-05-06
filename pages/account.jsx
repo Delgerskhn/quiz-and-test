@@ -1,16 +1,19 @@
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
-import Latestposts from "../components/Posts";
+import MyPosts from "../components/Posts";
 function account(props) {
+  const [context, setContext] = useState("");
   useEffect(() => {
-    console.log(props.url.query.action);
-  }, []);
+    const { action } = props.url.query;
+    if (action == "quiz") setContext(<MyPosts />);
+    else if (action == "test") setContext(<MyPosts />);
+  }, [props.url.query.action]);
   return (
     <Layout>
       <div className="container">
         <h1 class="display-4">My posts</h1>
         <hr />
-        <Latestposts />
+        {context}
       </div>
     </Layout>
   );

@@ -6,8 +6,10 @@ const Index = () => (
   <Layout>
     <div>
       <Jumbotron />
-      <h1 class="display-4">Latest quizes</h1>
-      <hr></hr>
+      <div className="container">
+        <h1 class="display-4">Latest quizes</h1>
+        <hr></hr>
+      </div>
       <LatestPosts />
     </div>
   </Layout>

@@ -41,9 +41,6 @@ export default () => (
             }
           >
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link href="/account?action=info">
-                <a class="dropdown-item">My information</a>
-              </Link>
               <Link href="/account?action=quiz">
                 <a class="dropdown-item">My quizes</a>
               </Link>
