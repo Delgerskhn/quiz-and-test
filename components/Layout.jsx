@@ -8,7 +8,7 @@ const Layout = (props) => (
       <link rel="stylesheet" href="/bootstrap.css" />
     </Head>
     <Navbar />
-    <div className="container">{props.children}</div>
+    <div className="">{props.children}</div>
   </div>
 );
 

@@ -1,9 +1,12 @@
 import Layout from "../components/Layout";
 import Fetch from "isomorphic-unfetch";
+import Jumbotron from "../components/Jumbotron";
+import LatestPosts from "../components/Latestposts";
 const Index = () => (
   <Layout>
     <div>
-      <h1>Hello world</h1>
+      <Jumbotron />
+      <LatestPosts />
     </div>
   </Layout>
 );

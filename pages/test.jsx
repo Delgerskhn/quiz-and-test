@@ -1,11 +1,10 @@
 import React from "react";
 import Layout from "../components/Layout";
-import account from "./account";
 
 export default function test() {
-  account.call(this);
+  return (
+    <Layout>
+      <h1>TEST</h1>
+    </Layout>
+  );
 }
-test.prototype.handleClick = function () {
-  console.log("sdfhadsf");
-};
-Object.setPrototypeOf(test.prototype, account.prototype);
