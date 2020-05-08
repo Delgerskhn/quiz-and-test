@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import UserContext from "../context/userContext";
 
 export default function Login() {
   const [modal, setmodal] = useState("none");
   const [register, setRegister] = useState(false);
+  const { user, signIn, signOut, signUp } = useContext(UserContext);
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [username, setusername] = useState("");
+  const [repassword, setrepassword] = useState("");
   const showmodal = () => {
     setmodal(modal == "none" ? "block" : "none");
+  };
+  const handleInput = (e, key) => {
+    eval(`set${key}('${e.target.value}')`);
   };
   return (
     <li className="nav-item">
@@ -42,6 +51,8 @@ export default function Login() {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    value={email}
+                    onChange={(e) => handleInput(e, "email")}
                   />
                   <small id="emailHelp" className="form-text text-muted">
                     We'll never share your email with anyone else.
@@ -54,6 +65,8 @@ export default function Login() {
                       type="text"
                       className="form-control"
                       id="exampleInputPassword1"
+                      value={username}
+                      onChange={(e) => handleInput(e, "username")}
                     />
                   </div>
                 ) : (
@@ -66,6 +79,8 @@ export default function Login() {
                     type="password"
                     className="form-control"
                     id="exampleInputPassword1"
+                    value={password}
+                    onChange={(e) => handleInput(e, "password")}
                   />
                 </div>
                 {register ? (
@@ -75,6 +90,8 @@ export default function Login() {
                       type="password"
                       className="form-control"
                       id="exampleInputPassword1"
+                      value={repassword}
+                      onChange={(e) => handleInput(e, "repassword")}
                     />
                   </div>
                 ) : (
@@ -94,7 +111,12 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => {
-                  if (register) signup();
+                  if (register)
+                    signUp({
+                      email: email,
+                      password: password,
+                      name: username,
+                    });
                   else setRegister(true);
                 }}
                 className="btn btn-primary"
@@ -102,7 +124,10 @@ export default function Login() {
                 {register ? "Click to register" : "Register"}
               </button>
               <button
-                onClick={() => setRegister(false)}
+                onClick={() => {
+                  if (!register) signIn({ email: email, password: password });
+                  else setRegister(false);
+                }}
                 type="submit"
                 className="btn btn-success"
               >
@@ -115,5 +140,3 @@ export default function Login() {
     </li>
   );
 }
-
-const signup = () => {};
