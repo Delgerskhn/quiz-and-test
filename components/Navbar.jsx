@@ -3,9 +3,9 @@ import Login from "../components/Login";
 import Dropdown from "./Dropdown";
 
 export default () => (
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <button
-      class="navbar-toggler"
+      className="navbar-toggler"
       type="button"
       data-toggle="collapse"
       data-target="#navbarSupportedContent"
@@ -13,23 +13,23 @@ export default () => (
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span className="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item active">
           <Link href="/">
-            <a class="nav-link">
-              Home <span class="sr-only">(current)</span>
+            <a className="nav-link">
+              Home <span className="sr-only">(current)</span>
             </a>
           </Link>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <Dropdown
             invoker={
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -40,40 +40,40 @@ export default () => (
               </a>
             }
           >
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link href="/account?action=quiz">
-                <a class="dropdown-item">My quizes</a>
+                <a className="dropdown-item">My quizes</a>
               </Link>
               <Link href="/account?action=test">
-                <a class="dropdown-item">My tests</a>
+                <a className="dropdown-item">My tests</a>
               </Link>
             </div>
           </Dropdown>
         </li>
-        <li class="nav-item ">
+        <li className="nav-item ">
           <Link href="/quiz">
-            <a class="nav-link">
-              Quiz <span class="sr-only">(current)</span>
+            <a className="nav-link">
+              Quiz <span className="sr-only">(current)</span>
             </a>
           </Link>
         </li>
-        <li class="nav-item ">
+        <li className="nav-item ">
           <Link href="/test">
-            <a class="nav-link">
-              Test <span class="sr-only">(current)</span>
+            <a className="nav-link">
+              Test <span className="sr-only">(current)</span>
             </a>
           </Link>
         </li>
         <Login />
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form className="form-inline my-2 my-lg-0">
         <input
-          class="form-control mr-sm-2"
+          className="form-control mr-sm-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
         </button>
       </form>

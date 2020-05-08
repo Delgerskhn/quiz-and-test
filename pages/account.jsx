@@ -1,21 +1,21 @@
-import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
 import MyPosts from "../components/Posts";
+import router from "next/router";
+
 function account(props) {
-  const [context, setContext] = useState("");
+  const [content, setcontent] = useState("");
   useEffect(() => {
-    const { action } = props.url.query;
-    if (action == "quiz") setContext(<MyPosts />);
-    else if (action == "test") setContext(<MyPosts />);
-  }, [props.url.query.action]);
+    console.log(router);
+    const { action } = router.router.query;
+    if (action == "quiz") setcontent(<MyPosts />);
+    else if (action == "test") setcontent(<MyPosts />);
+  }, [router.router.query]);
   return (
-    <Layout>
-      <div className="container">
-        <h1 class="display-4">My posts</h1>
-        <hr />
-        {context}
-      </div>
-    </Layout>
+    <div className="container">
+      <h1 className="display-4">My posts</h1>
+      <hr />
+      {content}
+    </div>
   );
 }
 

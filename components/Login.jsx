@@ -2,24 +2,30 @@ import React, { useState } from "react";
 
 export default function Login() {
   const [modal, setmodal] = useState("none");
+  const [register, setRegister] = useState(false);
   const showmodal = () => {
     setmodal(modal == "none" ? "block" : "none");
   };
   return (
-    <li class="nav-item">
+    <li className="nav-item">
       <summary>
-        <a class="nav-link" onClick={showmodal}>
+        <a className="nav-link" onClick={showmodal}>
           Login
         </a>
       </summary>
-      <div class="modal" style={{ display: modal }} tabindex="1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+      <div
+        className="modal"
+        style={{ display: modal }}
+        tabIndex="1"
+        role="dialog"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Login</h5>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
                 onClick={showmodal}
@@ -27,54 +33,80 @@ export default function Login() {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input
                     type="email"
-                    class="form-control"
+                    className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                   />
-                  <small id="emailHelp" class="form-text text-muted">
+                  <small id="emailHelp" className="form-text text-muted">
                     We'll never share your email with anyone else.
                   </small>
                 </div>
-                <div class="form-group">
+                {register ? (
+                  <div className="form-group">
+                    <label for="exampleInputPassword1">User name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                <div className="form-group">
                   <label for="exampleInputPassword1">Password</label>
                   <input
                     type="password"
-                    class="form-control"
+                    className="form-control"
                     id="exampleInputPassword1"
                   />
                 </div>
-                <div class="form-group form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1">
-                    Check me out
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                  Submit
-                </button>
+                {register ? (
+                  <div className="form-group">
+                    <label for="exampleInputPassword1">Re type password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
               </form>
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-dismiss="modal"
                 onClick={showmodal}
               >
                 Close
               </button>
-              <button type="button" onClick={showmodal} class="btn btn-primary">
-                Save changes
+              <button
+                type="button"
+                onClick={() => {
+                  if (register) signup();
+                  else setRegister(true);
+                }}
+                className="btn btn-primary"
+              >
+                {register ? "Click to register" : "Register"}
+              </button>
+              <button
+                onClick={() => setRegister(false)}
+                type="submit"
+                className="btn btn-success"
+              >
+                {register ? "Login" : "Click to login"}
               </button>
             </div>
           </div>
@@ -83,3 +115,5 @@ export default function Login() {
     </li>
   );
 }
+
+const signup = () => {};

@@ -11,19 +11,19 @@ nisi vulputate fringilla. Donec lacinia congue felis in faucibus.`,
     })
   );
   return (
-    <div class="container">
-      <ul class="list-unstyled">
-        {list.map((a) => (
-          <li class="media">
+    <div className="container">
+      <ul className="list-unstyled">
+        {list.map((a, i) => (
+          <li key={i} className="media">
             <img
               src="/dsample.png"
-              class="mr-3"
+              className="mr-3"
               alt="..."
               width="100"
               height="100"
             />
-            <div class="media-body">
-              <h5 class="mt-0 mb-1">{a.title}</h5>
+            <div className="media-body">
+              <h5 className="mt-0 mb-1">{a.title}</h5>
               Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
               scelerisque ante sollicitudin. Cras purus odio, vestibulum in
               vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
