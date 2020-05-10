@@ -7,15 +7,44 @@ class MyApp extends App {
     user: null,
   };
   signIn = async (body) => {
-    let result = await Fetch("http://localhost:4000/api/user/login", body);
-    localStorage.setItem("billionaire-token", result);
+    let result = JSON.parse(
+      await Fetch("http://localhost:4000/api/user/login", body)
+    );
+    if (!result.message) {
+      localStorage.setItem("billionaire-token", result.token);
+      this.setState({ user: result.user });
+    } else return result.message;
     console.log(result);
   };
   signUp = async (body) => {
-    let result = await Fetch("http://localhost:4000/api/user/register", body);
+    let result = JSON.parse(
+      await Fetch("http://localhost:4000/api/user/register", body)
+    );
     console.log(result);
+    if (result.message) return result;
   };
-  signOut = () => {};
+  verify = async () => {
+    let token = localStorage.getItem("billionaire-token");
+    let result =
+      token &&
+      JSON.parse(
+        await Fetch("http://localhost:4000/api/user/auth", "", "post", token)
+      );
+    console.log(result);
+    if (result) {
+      this.setState({ user: result.user });
+    } else {
+      localStorage.removeItem("billionaire-token");
+    }
+  };
+  signOut = () => {
+    this.setState({ user: null });
+    localStorage.removeItem("billionaire-token");
+  };
+  componentWillMount() {
+    this.verify();
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -25,6 +54,7 @@ class MyApp extends App {
           signIn: this.signIn,
           signOut: this.signOut,
           signUp: this.signUp,
+          verify: this.verify,
         }}
       >
         <Layout>

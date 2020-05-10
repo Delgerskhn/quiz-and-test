@@ -2,7 +2,23 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const verify = require("../verify");
 const schema = new mongoose.Schema({}, { strict: false });
+const quiz = require("./quiz");
 
+router.post("/createquiz", verify, async (req, res) => {
+  try {
+    let Quiz = new quiz(req.body);
+    let saved = await Quiz.save();
+    console.log(req.body);
+    res.send(saved);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
+router.post("/test", verify, async (req, res) => {
+  const collection = await quiz.aggregate([{ $sample: { size: 3 } }]);
+  res.send(collection);
+});
 router.get("/:collection", verify, (req, res) => {
   const collectionName = req.params.collection;
   const user = req.user;

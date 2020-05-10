@@ -1,14 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../context/userContext";
 
 export default function Login() {
   const [modal, setmodal] = useState("none");
   const [register, setRegister] = useState(false);
-  const { user, signIn, signOut, signUp } = useContext(UserContext);
+  const { user, signIn, signOut, signUp, verify } = useContext(UserContext);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
   const [repassword, setrepassword] = useState("");
+  const [message, setmessage] = useState("");
+  useEffect(() => {
+    setmessage("");
+  }, [register]);
   const showmodal = () => {
     setmodal(modal == "none" ? "block" : "none");
   };
@@ -18,9 +22,15 @@ export default function Login() {
   return (
     <li className="nav-item">
       <summary>
-        <a className="nav-link" onClick={showmodal}>
-          Login
-        </a>
+        {user ? (
+          <a className="nav-link" onClick={signOut}>
+            Sign out
+          </a>
+        ) : (
+          <a className="nav-link" onClick={showmodal}>
+            Sign in
+          </a>
+        )}
       </summary>
       <div
         className="modal"
@@ -31,7 +41,7 @@ export default function Login() {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Login</h5>
+              <h5 className="modal-title">Sign in</h5>
               <button
                 type="button"
                 className="close"
@@ -45,7 +55,7 @@ export default function Login() {
             <div className="modal-body">
               <form>
                 <div className="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
+                  <label>Email address</label>
                   <input
                     type="email"
                     className="form-control"
@@ -60,7 +70,7 @@ export default function Login() {
                 </div>
                 {register ? (
                   <div className="form-group">
-                    <label for="exampleInputPassword1">User name</label>
+                    <label>User name</label>
                     <input
                       type="text"
                       className="form-control"
@@ -74,7 +84,7 @@ export default function Login() {
                 )}
 
                 <div className="form-group">
-                  <label for="exampleInputPassword1">Password</label>
+                  <label>Password</label>
                   <input
                     type="password"
                     className="form-control"
@@ -85,7 +95,7 @@ export default function Login() {
                 </div>
                 {register ? (
                   <div className="form-group">
-                    <label for="exampleInputPassword1">Re type password</label>
+                    <label>Re type password</label>
                     <input
                       type="password"
                       className="form-control"
@@ -97,6 +107,9 @@ export default function Login() {
                 ) : (
                   ""
                 )}
+                <div className="form-group">
+                  <label className="text-danger">{message}</label>
+                </div>
               </form>
             </div>
             <div className="modal-footer">
@@ -110,28 +123,37 @@ export default function Login() {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  if (register)
-                    signUp({
-                      email: email,
-                      password: password,
-                      name: username,
-                    });
-                  else setRegister(true);
+                onClick={async () => {
+                  if (register) {
+                    if (password == repassword) {
+                      let result = await signUp({
+                        email: email,
+                        password: password,
+                        name: username,
+                      });
+                      if (result.message) setmessage(result.message);
+                    } else setmessage("Passwords are not matching");
+                  } else setRegister(true);
                 }}
                 className="btn btn-primary"
               >
                 {register ? "Click to register" : "Register"}
               </button>
               <button
-                onClick={() => {
-                  if (!register) signIn({ email: email, password: password });
-                  else setRegister(false);
+                onClick={async () => {
+                  if (!register) {
+                    let result = await signIn({
+                      email: email,
+                      password: password,
+                    });
+                    if (result) setmessage(result);
+                    else showmodal();
+                  } else setRegister(false);
                 }}
                 type="submit"
                 className="btn btn-success"
               >
-                {register ? "Login" : "Click to login"}
+                {register ? "Sign in" : "Click to sign in"}
               </button>
             </div>
           </div>
