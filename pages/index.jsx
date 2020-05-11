@@ -1,10 +1,19 @@
-import { useContext, useEffect } from "react";
-import Fetch from "isomorphic-unfetch";
+import { useContext, useEffect, useState } from "react";
 import Jumbotron from "../components/Jumbotron";
 import LatestPosts from "../components/Posts";
 import UserContext from "../context/userContext";
+import Fetch from "../components/fetch";
+
 const Index = () => {
   const { user, signIn, signOut } = useContext(UserContext);
+  const [collection, setCollection] = useState([]);
+  useEffect(() => {
+    (async () => {
+      let collection = await Fetch("http://localhost:4000/api/db/latestquizes");
+      collection = Array.from(JSON.parse(collection));
+      setCollection(collection);
+    })();
+  }, []);
   return (
     <div>
       <Jumbotron />
@@ -12,7 +21,7 @@ const Index = () => {
         <h1 className="display-4">Latest quizes</h1>
         <hr></hr>
       </div>
-      <LatestPosts />
+      <LatestPosts collection={collection} />
     </div>
   );
 };

@@ -29,7 +29,7 @@ export default () => {
             </Link>
           </li>
           {user ? (
-            <div class="d-flex">
+            <div className="d-flex">
               <li className="nav-item">
                 <Dropdown
                   invoker={

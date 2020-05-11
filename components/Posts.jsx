@@ -1,33 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-export default function Latestposts() {
-  const [list, setlist] = useState(
-    new Array(5).fill({
-      title: "Sample title",
-      body: `Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-nisi vulputate fringilla. Donec lacinia congue felis in faucibus.`,
-    })
-  );
+export default function Latestposts(props) {
+  useEffect(() => {}, []);
   return (
     <div className="container">
       <ul className="list-unstyled">
-        {list.map((a, i) => (
-          <li key={i} className="media">
-            <img
-              src="/dsample.png"
-              className="mr-3"
-              alt="..."
-              width="100"
-              height="100"
-            />
+        {(props.collection || []).map((quiz, i) => (
+          <li key={i} className="media mb-3">
             <div className="media-body">
-              <h5 className="mt-0 mb-1">{a.title}</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              <h5 className="mt-0 mb-1">
+                {i + 1}. {quiz.question}
+              </h5>
+              {props.test ? (
+                <form>
+                  {quiz.answers.map((answer, j) => (
+                    <div class="radio " onClick={() => props.setanswer(i, j)}>
+                      <label>
+                        <input type="radio" name="optradio" />
+                        {answer.value}
+                      </label>
+                    </div>
+                  ))}
+                </form>
+              ) : (
+                ""
+              )}
             </div>
           </li>
         ))}

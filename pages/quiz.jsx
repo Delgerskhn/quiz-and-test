@@ -2,11 +2,25 @@ import React, { useState, useEffect, useContext } from "react";
 import Quizes from "../components/Posts";
 import router from "next/router";
 import UserContext from "../context/userContext";
+import Fetch from "../components/fetch";
 
 export default function account() {
   const { user } = useContext(UserContext);
+  const [collection, setCollection] = useState([]);
   useEffect(() => {
     if (!user) router.push("/");
+    else {
+      (async () => {
+        let collection = await Fetch(
+          "http://localhost:4000/api/db/latestquizes",
+          "",
+          "post",
+          localStorage.getItem("billionaire-token")
+        );
+        collection = Array.from(JSON.parse(collection));
+        setCollection(collection);
+      })();
+    }
   }, [user]);
   return (
     <div className="container">
@@ -17,7 +31,7 @@ export default function account() {
         </button>
       </div>
       <hr></hr>
-      <Quizes />
+      <Quizes collection={collection} />
     </div>
   );
 }
