@@ -12,20 +12,29 @@ export default function Latestposts(props) {
                 {i + 1}. {quiz.question}
               </h5>
               {props.test ? (
-                <form>
-                  {quiz.answers.map((answer, j) => (
-                    <div class="radio ">
-                      <label>
-                        <input
-                          type="radio"
-                          name="optradio"
-                          onClick={() => props.setanswer(quiz._id, j)}
-                        />
-                        {answer.value}
-                      </label>
-                    </div>
-                  ))}
-                </form>
+                <div>
+                  <form>
+                    {quiz.answers.map((answer, j) => (
+                      <div class="radio ">
+                        <label>
+                          <input
+                            type="radio"
+                            name="optradio"
+                            onClick={() => props.setanswer(quiz._id, j)}
+                          />
+                          {answer.value}
+                        </label>
+                      </div>
+                    ))}
+                  </form>
+                  {quiz.validAnswer !== undefined ? (
+                    <p className="text-success">
+                      Correct answer is: {quiz.answers[quiz.validAnswer].value}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </div>
               ) : (
                 ""
               )}

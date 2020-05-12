@@ -12,6 +12,8 @@ export default function test() {
   const [quizes, setquizes] = useState(null);
   const [form, setform] = useState(null);
   const [time, settime] = useState(null);
+  const [result, setresult] = useState(null);
+  const [message, setmessage] = useState(null);
   useEffect(() => {
     if (!user) router.push("/");
   }, [user]);
@@ -47,6 +49,16 @@ export default function test() {
       "post",
       localStorage.getItem("billionaire-token")
     );
+    result = JSON.parse(result);
+    let quizWithAnswer = quizes.map((a) => {
+      return {
+        ...a,
+        validAnswer: result.answers[a._id],
+      };
+    });
+    setquizes(quizWithAnswer);
+    setresult(result.result);
+    if (result.message) setmessage(result.message);
     console.log(result);
   };
   return (
@@ -81,12 +93,15 @@ export default function test() {
                 test={true}
                 collection={quizes}
               />
+              {message ? <h3 className="text-danger">{message}</h3> : ""}
               <button
-                onClick={submittest}
+                onClick={() => {
+                  if (!result) submittest();
+                }}
                 className="btn btn-success btn-lg"
                 role="button"
               >
-                Submit the test
+                {result ? "Your test result: " + result : "Submit the test"}
               </button>
             </div>
           ) : (

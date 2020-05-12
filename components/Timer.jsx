@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function Timer(props) {
   const [time, settime] = useState(null);
   useEffect(() => {
-    if (props.time) settime(props.time);
+    if (props.time !== null) settime(props.time);
   }, [props.time]);
   useEffect(() => {
     if (time > 0)
