@@ -3,7 +3,6 @@ const path = require("path");
 
 module.exports = function (req, res, next) {
   const token = req.header("auth-token");
-  console.log("token:", token);
   if (token != undefined) {
     try {
       const verified = jwt.verify(token, process.env.TOKEN_SECRET); //token iig tulgaj uzeed verified dotor user iin id g hadgalj bui heseg buyu payload iin decrypt hiij bga

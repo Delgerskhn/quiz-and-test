@@ -4,32 +4,40 @@ import UserContext from "../context/userContext";
 import Fetch from "../components/fetch";
 import Latestposts from "../components/Posts";
 import TestContext from "../context/testContext";
+import Loader from "../components/Loader";
+import Timer from "../components/Timer";
 
 export default function test() {
   const { user } = useContext(UserContext);
   const [quizes, setquizes] = useState(null);
   const [form, setform] = useState(null);
+  const [time, settime] = useState(null);
   useEffect(() => {
     if (!user) router.push("/");
   }, [user]);
   const fetchData = async () => {
-    let result = JSON.parse(
-      await Fetch(
-        "http://localhost:4000/api/db/test",
-        "",
-        "post",
-        localStorage.getItem("billionaire-token")
-      )
+    let result = await Fetch(
+      "http://localhost:4000/api/db/test",
+      "",
+      "post",
+      localStorage.getItem("billionaire-token")
     );
+    console.log(result);
+    result = JSON.parse(result);
     if (!result.message) {
-      setquizes(result);
-      setform(result.map((a) => ({ _id: a._id, validAnswer: -1 })));
+      setquizes(result.quizes);
+      let form = {};
+      result.quizes.forEach((a) => {
+        form[a._id] = -1;
+      });
+      setform(form);
+      settime(result.time);
     }
     console.log(result);
   };
-  const setanswer = (i, j) => {
+  const setanswer = (id, j) => {
     let tempform = form;
-    tempform[i].validAnswer = j;
+    tempform[id] = j;
     setform(tempform);
   };
   const submittest = async () => {
@@ -52,14 +60,17 @@ export default function test() {
               space of its parent.
             </p>
             <hr className="my-4" />
-
-            <button
-              onClick={fetchData}
-              className="btn btn-primary btn-lg"
-              role="button"
-            >
-              {quizes ? "60s" : "Begin the test"}
-            </button>
+            {quizes ? (
+              <Timer time={time} />
+            ) : (
+              <button
+                onClick={fetchData}
+                className="btn btn-primary btn-lg"
+                role="button"
+              >
+                "Begin the test"
+              </button>
+            )}
           </div>
         </div>
         <div className="container">
@@ -79,20 +90,7 @@ export default function test() {
               </button>
             </div>
           ) : (
-            <div className="d-flex justify-content-center">
-              <div className="spinner-grow text-primary" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-secondary" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-success" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-danger" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
+            <Loader />
           )}
         </div>
       </div>

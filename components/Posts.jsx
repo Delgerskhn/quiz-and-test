@@ -14,9 +14,13 @@ export default function Latestposts(props) {
               {props.test ? (
                 <form>
                   {quiz.answers.map((answer, j) => (
-                    <div class="radio " onClick={() => props.setanswer(i, j)}>
+                    <div class="radio ">
                       <label>
-                        <input type="radio" name="optradio" />
+                        <input
+                          type="radio"
+                          name="optradio"
+                          onClick={() => props.setanswer(quiz._id, j)}
+                        />
                         {answer.value}
                       </label>
                     </div>
