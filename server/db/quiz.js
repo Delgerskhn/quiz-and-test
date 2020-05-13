@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ObjectId = require("mongodb").ObjectID;
 function ansLength(val) {
   return val.length == 3;
 }
@@ -21,6 +22,10 @@ var parentSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+  },
+  user: {
+    type: ObjectId,
+    required: true,
   },
 });
 

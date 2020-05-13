@@ -22,7 +22,7 @@ export default function test() {
       "http://localhost:4000/api/db/test",
       "",
       "post",
-      localStorage.getItem("billionaire-token")
+      window.localStorage.getItem("billionaire-token")
     );
     console.log(result);
     result = JSON.parse(result);
@@ -47,7 +47,7 @@ export default function test() {
       "http://localhost:4000/api/db/submittest",
       form,
       "post",
-      localStorage.getItem("billionaire-token")
+      window.localStorage.getItem("billionaire-token")
     );
     result = JSON.parse(result);
     let quizWithAnswer = quizes.map((a) => {
@@ -80,7 +80,7 @@ export default function test() {
                 className="btn btn-primary btn-lg"
                 role="button"
               >
-                "Begin the test"
+                Begin the test
               </button>
             )}
           </div>

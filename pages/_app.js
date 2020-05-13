@@ -11,7 +11,7 @@ class MyApp extends App {
       await Fetch("http://localhost:4000/api/user/login", body)
     );
     if (!result.message) {
-      localStorage.setItem("billionaire-token", result.token);
+      window.localStorage.setItem("billionaire-token", result.token);
       this.setState({ user: result.user });
     } else return result.message;
     console.log(result);
@@ -24,7 +24,7 @@ class MyApp extends App {
     if (result.message) return result;
   };
   verify = async () => {
-    let token = localStorage.getItem("billionaire-token");
+    let token = window.localStorage.getItem("billionaire-token");
     let result =
       token &&
       JSON.parse(
@@ -34,12 +34,12 @@ class MyApp extends App {
     if (result) {
       this.setState({ user: result.user });
     } else {
-      localStorage.removeItem("billionaire-token");
+      window.localStorage.removeItem("billionaire-token");
     }
   };
   signOut = () => {
     this.setState({ user: null });
-    localStorage.removeItem("billionaire-token");
+    window.localStorage.removeItem("billionaire-token");
   };
   componentWillMount() {
     this.verify();

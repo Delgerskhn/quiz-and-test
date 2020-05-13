@@ -24,10 +24,10 @@ class Timer {
 
 router.post("/createquiz", verify, async (req, res) => {
   try {
-    let Quiz = new quiz(req.body);
+    let Quiz = new quiz({ ...req.body, user: req.user._id });
     let saved = await Quiz.save();
     console.log(req.body);
-    res.send(saved);
+    res.send({ success: 1 });
   } catch (e) {
     res.status(400).send(e.message);
   }
