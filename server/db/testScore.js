@@ -15,6 +15,10 @@ var testScore = new mongoose.Schema({
     type: ObjectId,
     required: true,
   },
+  testcase: {
+    type: Array,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("testScore", testScore);
