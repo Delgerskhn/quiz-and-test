@@ -7,7 +7,7 @@ export default function Latestposts(props) {
       <ul className="list-unstyled">
         {(props.collection || []).map((quiz, i) => (
           <li key={i} className="media mb-3">
-            <div className="media-body">
+            <div className="media-body text-secondary">
               <h5 className="mt-0 mb-1">
                 {i + 1}. {quiz.question}
               </h5>
