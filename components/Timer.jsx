@@ -10,6 +10,7 @@ export default function Timer(props) {
       setTimeout(function () {
         settime(time - 1);
       }, 1000);
+    else if (time != null) props.submittest();
   }, [time]);
   return (
     <button className="btn btn-primary btn-lg" role="button">

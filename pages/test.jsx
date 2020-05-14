@@ -73,7 +73,11 @@ export default function test() {
             </p>
             <hr className="my-4" />
             {quizes ? (
-              <Timer time={time} />
+              result == null ? (
+                <Timer submittest={submittest} time={time} />
+              ) : (
+                ""
+              )
             ) : (
               <button
                 onClick={fetchData}

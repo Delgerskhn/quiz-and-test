@@ -131,7 +131,7 @@ export default function Login() {
                         password: password,
                         name: username,
                       });
-                      if (result.message) setmessage(result.message);
+                      if (result?.message) setmessage(result.message);
                     } else setmessage("Passwords are not matching");
                   } else setRegister(true);
                 }}
