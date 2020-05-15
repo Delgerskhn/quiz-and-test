@@ -11,7 +11,7 @@ export default function account() {
   const [showInput, setInput] = useState(false);
   const fetchQuiz = async () => {
     let collection = await Fetch(
-      "http://localhost:4000/api/db/latestquizes",
+      `${process.env.API_URL}/api/db/latestquizes`,
       "",
       "post",
       window.localStorage.getItem("billionaire-token")

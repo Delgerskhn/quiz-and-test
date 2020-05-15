@@ -13,7 +13,7 @@ function account(props) {
   const setQuizes = async () => {
     let result = JSON.parse(
       await Fetch(
-        "http://localhost:4000/api/db/getquizes",
+        `${process.env.API_URL}/api/db/getquizes`,
         "",
         "post",
         localStorage.getItem("billionaire-token")
@@ -26,7 +26,7 @@ function account(props) {
   const setTests = async () => {
     let result = JSON.parse(
       await Fetch(
-        "http://localhost:4000/api/db/gettests",
+        `${process.env.API_URL}/api/db/gettests`,
         "",
         "post",
         localStorage.getItem("billionaire-token")

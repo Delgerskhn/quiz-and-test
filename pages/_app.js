@@ -8,7 +8,7 @@ class MyApp extends App {
   };
   signIn = async (body) => {
     let result = JSON.parse(
-      await Fetch("http://localhost:4000/api/user/login", body)
+      await Fetch(`${process.env.API_URL}/api/user/login`, body)
     );
     if (!result.message) {
       window.localStorage.setItem("billionaire-token", result.token);
@@ -18,7 +18,7 @@ class MyApp extends App {
   };
   signUp = async (body) => {
     let result = JSON.parse(
-      await Fetch("http://localhost:4000/api/user/register", body)
+      await Fetch(`${process.env.API_URL}/api/user/register`, body)
     );
     console.log(result);
     if (result.message) return result;
@@ -28,7 +28,7 @@ class MyApp extends App {
     let result =
       token &&
       JSON.parse(
-        await Fetch("http://localhost:4000/api/user/auth", "", "post", token)
+        await Fetch(`${process.env.API_URL}/api/user/auth`, "", "post", token)
       );
     console.log(result);
     if (result) {

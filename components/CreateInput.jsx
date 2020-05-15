@@ -26,7 +26,7 @@ export default function CreateInput(props) {
     };
     let result = JSON.parse(
       await Fetch(
-        "http://localhost:4000/api/db/createquiz",
+        `${process.env.API_URL}/api/db/createquiz`,
         body,
         "post",
         localStorage.getItem("billionaire-token")

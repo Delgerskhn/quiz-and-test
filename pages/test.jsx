@@ -19,7 +19,7 @@ export default function test() {
   }, [user]);
   const fetchData = async () => {
     let result = await Fetch(
-      "http://localhost:4000/api/db/test",
+      `${process.env.API_URL}/api/db/test`,
       "",
       "post",
       window.localStorage.getItem("billionaire-token")
@@ -44,7 +44,7 @@ export default function test() {
   };
   const submittest = async () => {
     let result = await Fetch(
-      "http://localhost:4000/api/db/submittest",
+      `${process.env.API_URL}/api/db/submittest`,
       form,
       "post",
       window.localStorage.getItem("billionaire-token")

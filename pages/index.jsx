@@ -9,7 +9,9 @@ const Index = () => {
   const [collection, setCollection] = useState([]);
   useEffect(() => {
     (async () => {
-      let collection = await Fetch("http://localhost:4000/api/db/latestquizes");
+      let collection = await Fetch(
+        `${process.env.API_URL}/api/db/latestquizes`
+      );
       collection = Array.from(JSON.parse(collection));
       setCollection(collection);
     })();
