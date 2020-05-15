@@ -16,9 +16,18 @@ export default function Login() {
   const showmodal = () => {
     setmodal(modal == "none" ? "block" : "none");
   };
+  const resetInput = () => {
+    setemail("");
+    setpassword("");
+    setusername("");
+    setrepassword("");
+  };
   const handleInput = (e, key) => {
     eval(`set${key}('${e.target.value}')`);
   };
+  useEffect(() => {
+    resetInput();
+  }, [register]);
   return (
     <li className="nav-item">
       <summary>
@@ -28,7 +37,7 @@ export default function Login() {
           </a>
         ) : (
           <a className="nav-link" onClick={showmodal}>
-            Sign in
+            Sign up/in
           </a>
         )}
       </summary>
@@ -132,6 +141,7 @@ export default function Login() {
                         name: username,
                       });
                       if (result?.message) setmessage(result.message);
+                      else setRegister(false);
                     } else setmessage("Passwords are not matching");
                   } else setRegister(true);
                 }}
