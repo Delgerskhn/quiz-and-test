@@ -3,17 +3,15 @@ const app = express();
 const path = require("path");
 const authRoute = require("./auth/route.js");
 const verify = require("./verify.js");
-const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dbRoute = require("./db/route");
 const bodyParser = require("body-parser");
 
-dotenv.config(); //secret things
-
+require("dotenv").config();
 mongoose
   .connect(
-    "mongodb://localhost:27017/quiz-and-test",
+    process.env.DB_CONNECT,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
