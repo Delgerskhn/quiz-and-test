@@ -10,14 +10,6 @@ export default function CreateInput(props) {
   const handleInput = (e, name) => {
     eval(`set${name}('${e.target.value}')`);
   };
-  useEffect(() => {
-    if (btnMsg != "Create quiz") {
-      setTimeout(() => {
-        props.setInput(!props.showInput);
-      }, 1000);
-      props.fetchQuiz();
-    }
-  }, [btnMsg]);
   const sendRequest = async () => {
     let body = {
       answers: [1, 2, 3].map((a) => ({ value: eval("answer" + a) })),
@@ -34,6 +26,10 @@ export default function CreateInput(props) {
     );
     if (result.message) setbtnMsg("Unsuccessful");
     else if (result.success) setbtnMsg("Successfully saved");
+    setTimeout(() => {
+      props.setInput(!props.showInput);
+    }, 1000);
+    props.fetchQuiz();
   };
   return (
     <div>
@@ -98,7 +94,12 @@ export default function CreateInput(props) {
                 Close
               </button>
               <button
-                onClick={sendRequest}
+                onClick={() => {
+                  if (answer1 && answer2 && answer3 && question) {
+                    if (validAnswer !== -1) sendRequest();
+                    else setbtnMsg("Select valid answer and try again");
+                  } else setbtnMsg("Please fill all inputs and try again");
+                }}
                 type="button"
                 className="btn btn-primary"
               >
